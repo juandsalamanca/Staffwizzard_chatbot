@@ -1,6 +1,7 @@
 import streamlit as st
 from src.openai_models import *
-
+from src.retriever import retrieve_info
+import json
 
 st.header("Staffwizzard employee chatbot")
 
@@ -12,6 +13,13 @@ input = st.chat_input(
     key="user_input",
     on_submit=clear_text
 )
+
+if "info_embeddings" not in st.session_state:
+    st.session_state.info_embeddings = np.load("data/info_embeddings.npy")
+if "info_list" not in st.session_state:
+    with open("data/info_list.json", "r") as f:
+        st.session_state.info_list = json.load(f)
+        
 sensitive_word_list = ["401k", "PTO"]
 
 if "input_memory" not in st.session_state:
@@ -30,11 +38,11 @@ def contains_any(string, word_list):
 
 sensitive = contains_any(input, sensitive_word_list)
 if sensitive:
-  info, sensitive_info = retrieve_info(input)
+  info, sensitive_info = retrieve_info(input, st.session_state.info_embeddings, st.session_state.info_list)
   response = employee_sensitive_info_chatbot("gpt-4o-mini", st.session_state.memory, info)
   respons += "Here it is"
 else:
-  info, sensitive_info = retrieve_info(input)
+  info, sensitive_info = retrieve_info(input, st.session_state.info_embeddings, st.session_state.info_list)
   response = employee_info_chatbot("gpt-4o-mini", st.session_state.memory, info)
 
 
