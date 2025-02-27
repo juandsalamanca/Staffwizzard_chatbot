@@ -2,6 +2,7 @@ import streamlit as st
 from src.openai_models import *
 from src.retriever import retrieve_info
 import json
+import numpy as np
 
 st.header("Staffwizzard employee chatbot")
 
