@@ -1,6 +1,6 @@
 from openai import OpenAI
 
-def employee_info_chatbot(model_engine, user_prompt, info):
+def employee_info_chatbot(model_engine, added_messages, info):
 
     # Replace with your desired model
     client = OpenAI()
@@ -19,9 +19,7 @@ def employee_info_chatbot(model_engine, user_prompt, info):
 
     messages = [
     {"role": "system",
-     "content": system_prompt},
-    {"role": "user",
-     "content": prompt}
+     "content": system_prompt}
     ]
 
 
@@ -40,7 +38,7 @@ def employee_info_chatbot(model_engine, user_prompt, info):
     #print("Adult Rewrite Response " + str(count))
     return response
 
-def employee_sensitive_info_chatbot(model_engine, user_prompt, info):
+def employee_sensitive_info_chatbot(model_engine, added_messages, info):
 
     # Replace with your desired model
     client = OpenAI()
@@ -53,9 +51,7 @@ def employee_sensitive_info_chatbot(model_engine, user_prompt, info):
 
     messages = [
     {"role": "system",
-     "content": "You're a useful assistant that helps employees know if they can certain information about them is available fro them to see. This could be 401k, PTO balance amounts etc"},
-    {"role": "user",
-     "content": prompt}
+     "content": "You're a useful assistant that helps employees know if certain information about them is available for them to see. This could be 401k, PTO balance amounts etc"}
     ]
 
 
