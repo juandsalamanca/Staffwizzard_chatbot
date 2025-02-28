@@ -1,8 +1,10 @@
-from openai import OpenAI
+#from openai import OpenAI
+from openai import AzureOpenAI
 from sklearn.metrics import mean_squared_error as mse
 
 def get_embedding(text):
-  client = OpenAI()
+  #client = OpenAI()
+  client = AzureOpenAI(api_key="db14efc60e704372abe4416b6ba048e1",  api_version="2024-02-01", azure_endpoint = "https://azo-iknow-ku-01.openai.azure.com/")
   response = client.embeddings.create(
       input = text,
       model= "text-embedding-3-large"
