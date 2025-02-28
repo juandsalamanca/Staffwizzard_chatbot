@@ -24,28 +24,29 @@ if "info_list" not in st.session_state:
 sensitive_word_list = ["401k", "PTO"]
 
 if "input_memory" not in st.session_state:
-  st.session_state.input_memory = ""
+    st.session_state.input_memory = ""
 
 st.session_state.memory = []
 
-if input and input != st.session_state.input_memory:
-  st.session_state.input_memory = input
-  st.session_state.memory.append({"role": "user", "content": input})
-
 def contains_any(string, word_list):
-  word_set = set(word_list)  # Convert list to set for O(1) membership tests
-  return any(word in string for word in word_set)
+    word_set = set(word_list)  # Convert list to set for O(1) membership tests
+    return any(word in string for word in word_set)
+    
 
+if input and input != st.session_state.input_memory:
+    st.session_state.input_memory = input
+    st.session_state.memory.append({"role": "user", "content": input})
+    
 
-sensitive = contains_any(input, sensitive_word_list)
-if sensitive:
-  info, sensitive_info = retrieve_info(input, st.session_state.info_embeddings, st.session_state.info_list)
-  response = employee_sensitive_info_chatbot("gpt-4o-mini", st.session_state.memory, info)
-  respons += "Here it is"
-else:
-  info, sensitive_info = retrieve_info(input, st.session_state.info_embeddings, st.session_state.info_list)
-  response = employee_info_chatbot("gpt-4o-mini", st.session_state.memory, info)
+    sensitive = contains_any(input, sensitive_word_list)
+    if sensitive:
+        info, sensitive_info = retrieve_info(input, st.session_state.info_embeddings, st.session_state.info_list)
+        response = employee_sensitive_info_chatbot("gpt-4o-mini", st.session_state.memory, info)
+        respons += "Here it is"
+    else:
+        info, sensitive_info = retrieve_info(input, st.session_state.info_embeddings, st.session_state.info_list)
+        response = employee_info_chatbot("gpt-4o-mini", st.session_state.memory, info)
+        
 
-
-response = model("gpt-4o-mini, st.session_state.memory, info)
-st.session_state.memory.append({"role": "user", "assistant": response})
+    st.session_state.memory.append({"role": "user", "assistant": response})
+    st.write(response)
