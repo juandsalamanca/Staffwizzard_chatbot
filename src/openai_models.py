@@ -17,7 +17,7 @@ def employee_info_chatbot(model_engine, added_messages, info):
      "content": system_prompt}
     ]
 
-
+    messages +=  added_messages
     response = client.chat.completions.create(
         model=model_engine,
         messages=messages,
@@ -42,7 +42,7 @@ def employee_sensitive_info_chatbot(model_engine, added_messages, info):
      "content": "You're a useful assistant that helps employees know if certain information about them is available for them to see. This could be 401k, PTO balance amounts etc"}
     ]
 
-
+    messages +=  added_messages
     response = client.chat.completions.create(
         model=model_engine,
         messages=messages,
