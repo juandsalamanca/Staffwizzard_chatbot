@@ -3,6 +3,9 @@ from src.openai_models import *
 from src.retriever import retrieve_info
 import json
 import numpy as np
+from dotenv import load_dotenv
+
+load_dotenv()
 
 st.header("Staffwizzard employee chatbot")
 
