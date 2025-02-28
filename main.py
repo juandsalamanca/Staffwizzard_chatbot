@@ -37,7 +37,6 @@ def contains_any(string, word_list):
     word_set = set(word_list)  # Convert list to set for O(1) membership tests
     return any(word in string for word in word_set)
     
-st.write("Current input:", input)
 if input:
     st.session_state.input_memory = input
     st.session_state.memory.append({"role": "user", "content": input})
@@ -46,10 +45,13 @@ if input:
     sensitive = contains_any(input, sensitive_word_list)
     if sensitive:
         info, sensitive_info = retrieve_info(input, st.session_state.info_embeddings, st.session_state.info_list)
+        st.write("Retrieved info:", info)
+        st.write("Retrieved sensitive info:", info)
         response = employee_sensitive_info_chatbot("gpt-4o-mini", st.session_state.memory, info)
         response += "Here it is"
     else:
         info, sensitive_info = retrieve_info(input, st.session_state.info_embeddings, st.session_state.info_list)
+        st.write("Retrieved info:", info)
         response = employee_info_chatbot("gpt-4o-mini", st.session_state.memory, info)
         
 
