@@ -30,7 +30,7 @@ sensitive_word_list = ["401k", "PTO"]
 if "input_memory" not in st.session_state:
     st.session_state.input_memory = ""
 
-if "memory" not in st.session_state
+if "memory" not in st.session_state:
     st.session_state.memory = []
 
 def contains_any(string, word_list):
