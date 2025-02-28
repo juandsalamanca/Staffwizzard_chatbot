@@ -43,9 +43,10 @@ if input:
     prompt = f"You need to answer what the user asks based on the following information: {info} the user says: {input}"
     st.session_state.memory.append({"role": "user", "content": prompt})
     sensitive = contains_any(input, sensitive_word_list)
+    st.write("Memory:", st.session_state.memory)
     if sensitive:
         response = employee_sensitive_info_chatbot("gpt-4o-mini", st.session_state.memory, info)
-        sensitive_response = "Here it is: \n" + sensitive_info
+        sensitive_response = " Here it is: \n" + sensitive_info
         response += sensitive_response
     else:
         response = employee_info_chatbot("gpt-4o-mini", st.session_state.memory, info)
