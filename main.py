@@ -6,13 +6,9 @@ import numpy as np
 
 st.header("Staffwizzard employee chatbot")
 
-def clear_text():
-    st.session_state.user_input = ""
-
 input = st.chat_input(
     "Ask something...", 
-    key="user_input",
-    on_submit=clear_text
+    key="user_input"
 )
 
 if "info_embeddings" not in st.session_state:
