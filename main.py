@@ -36,7 +36,7 @@ if "memory" not in st.session_state:
 def contains_any(string, word_list):
     word_set = set(word_list)  # Convert list to set for O(1) membership tests
     return any(word in string for word in word_set)
-st.write("Memory:", st.session_state.memory)
+    
 if input:
     st.session_state.input_memory = input    
     info, sensitive_info = retrieve_info(input, st.session_state.info_embeddings, st.session_state.info_list)
