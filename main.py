@@ -38,7 +38,7 @@ def contains_any(string, word_list):
     return any(word in string for word in word_set)
     
 st.write("Current input:", input)
-if input and input != st.session_state.input_memory:
+if input:
     st.session_state.input_memory = input
     st.session_state.memory.append({"role": "user", "content": input})
     
