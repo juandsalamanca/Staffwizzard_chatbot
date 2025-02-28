@@ -36,14 +36,14 @@ if "memory" not in st.session_state:
 def contains_any(string, word_list):
     word_set = set(word_list)  # Convert list to set for O(1) membership tests
     return any(word in string for word in word_set)
-    
+st.write("Memory:", st.session_state.memory)
 if input:
     st.session_state.input_memory = input    
     info, sensitive_info = retrieve_info(input, st.session_state.info_embeddings, st.session_state.info_list)
     prompt = f"You need to answer what the user asks based on the following information: {info} the user says: {input}"
     st.session_state.memory.append({"role": "user", "content": prompt})
     sensitive = contains_any(input, sensitive_word_list)
-    st.write("Memory:", st.session_state.memory)
+    
     if sensitive:
         response = employee_sensitive_info_chatbot("gpt-4o-mini", st.session_state.memory, info)
         sensitive_response = " Here it is: \n" + sensitive_info
