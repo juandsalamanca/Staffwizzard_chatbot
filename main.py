@@ -39,18 +39,16 @@ def contains_any(string, word_list):
     
 if input:
     st.session_state.input_memory = input    
+    info, sensitive_info = retrieve_info(input, st.session_state.info_embeddings, st.session_state.info_list)
     prompt = f"You need to answer what the user asks based on the following information: {info} the user says: {input}"
     st.session_state.memory.append({"role": "user", "content": prompt})
     sensitive = contains_any(input, sensitive_word_list)
     if sensitive:
-        info, sensitive_info = retrieve_info(input, st.session_state.info_embeddings, st.session_state.info_list)
         response = employee_sensitive_info_chatbot("gpt-4o-mini", st.session_state.memory, info)
         sensitive_response = "Here it is: \n" + sensitive_info
         response += sensitive_response
     else:
-        info, sensitive_info = retrieve_info(input, st.session_state.info_embeddings, st.session_state.info_list)
         response = employee_info_chatbot("gpt-4o-mini", st.session_state.memory, info)
         
-
     st.session_state.memory.append({"role": "user", "assistant": response})
     st.write(response)
