@@ -1,9 +1,10 @@
-from openai import OpenAI
-
+#from openai import OpenAI
+from openai import AzureOpenAI
 def employee_info_chatbot(model_engine, added_messages, info):
 
     # Replace with your desired model
-    client = OpenAI()
+    client = AzureOpenAI(api_key="4d165b8e531c49ec8ac0c256aa73d4bd", api_version="2024-02-01", azure_endpoint = "https://azo-iknow-ku-eus-01.openai.azure.com/")
+    #client = OpenAI()
 
     # Construct the prompt using formatted strings
 
