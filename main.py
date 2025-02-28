@@ -47,7 +47,7 @@ if input and input != st.session_state.input_memory:
     if sensitive:
         info, sensitive_info = retrieve_info(input, st.session_state.info_embeddings, st.session_state.info_list)
         response = employee_sensitive_info_chatbot("gpt-4o-mini", st.session_state.memory, info)
-        respons += "Here it is"
+        response += "Here it is"
     else:
         info, sensitive_info = retrieve_info(input, st.session_state.info_embeddings, st.session_state.info_list)
         response = employee_info_chatbot("gpt-4o-mini", st.session_state.memory, info)
