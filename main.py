@@ -9,6 +9,11 @@ load_dotenv()
 
 st.header("Staffwizzard employee chatbot")
 
+reset = st.button("Reset")
+if reset:
+    st.session_state.memory = []
+    st.session_state.input_memory = ""
+    
 input = st.chat_input(
     "Ask something...", 
     key="user_input"
@@ -25,13 +30,14 @@ sensitive_word_list = ["401k", "PTO"]
 if "input_memory" not in st.session_state:
     st.session_state.input_memory = ""
 
-st.session_state.memory = []
+if "memory" not in st.session_state
+    st.session_state.memory = []
 
 def contains_any(string, word_list):
     word_set = set(word_list)  # Convert list to set for O(1) membership tests
     return any(word in string for word in word_set)
     
-
+st.write("Current input:", input)
 if input and input != st.session_state.input_memory:
     st.session_state.input_memory = input
     st.session_state.memory.append({"role": "user", "content": input})
