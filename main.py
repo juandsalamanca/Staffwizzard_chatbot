@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-st.header("Staffwizzard employee chatbot")
+st.header("Staffwizard employee chatbot")
 
 reset = st.button("Reset")
 if reset:
