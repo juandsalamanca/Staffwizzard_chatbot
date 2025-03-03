@@ -36,10 +36,6 @@ if "memory" not in st.session_state:
 def contains_any(string, word_list):
     word_set = set(word_list)  # Convert list to set for O(1) membership tests
     return any(word in string for word in word_set)
-
-for message in st.session_state.memory:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
         
 if input:
     st.session_state.input_memory = input    
@@ -57,4 +53,7 @@ if input:
         response = employee_info_chatbot("gpt-4o-mini", st.session_state.memory, info)
         st.session_state.memory.append({"role": "assistant", "content": response})
         
-    st.write(response)
+for message in st.session_state.memory:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+        
