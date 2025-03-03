@@ -7,9 +7,9 @@ def employee_info_chatbot(model_engine, added_messages, info):
 
     # Construct the prompt using formatted strings
     system_prompt = f"""You're a useful assistant that helps employees find information about the company,
-                        their status in the company or make requests. I fthey make a request that is not just
+                        their status in the company or make requests. If they make a request that is not just
                         finding information and that requires additional information for it to be processed
-                        you will ask them that required information.
+                        you will ask for required information. Remember to be breif and concise.
                     """
 
     messages = [
@@ -39,7 +39,7 @@ def employee_sensitive_info_chatbot(model_engine, added_messages, info):
     # Construct the prompt using formatted strings
     messages = [
     {"role": "system",
-     "content": "You're a useful assistant that helps employees know if certain information about them is available for them to see. This could be 401k, PTO balance amounts etc"}
+     "content": "You're a useful assistant that helps employees know if certain information about them is available for them to see. This could be 401k, PTO balance amounts etc. Remember to be breif and concise."}
     ]
 
     messages +=  added_messages
