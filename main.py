@@ -47,7 +47,7 @@ if input:
     if sensitive:
         response = employee_sensitive_info_chatbot("gpt-4o-mini", st.session_state.memory, info)
         st.session_state.memory.append({"role": "assistant", "content": response})
-        sensitive_response = " Here it is: \n" + sensitive_info
+        sensitive_response += sensitive_info
         response += sensitive_response
     else:
         response = employee_info_chatbot("gpt-4o-mini", st.session_state.memory, info)
