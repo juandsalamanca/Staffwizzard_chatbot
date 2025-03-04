@@ -58,6 +58,6 @@ for message in st.session_state.memory:
         content = message["content"]
         if message["role"] == "user":
             idx = content.index("says:")
-            content = content[idx:]
+            content = content[idx+6:]
         st.markdown(content)
         
