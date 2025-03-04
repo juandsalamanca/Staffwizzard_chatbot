@@ -13,6 +13,7 @@ reset = st.button("Reset")
 if reset:
     st.session_state.memory = []
     st.session_state.input_memory = ""
+    st.session_state.sensitive_memory = []
     
 input = st.chat_input(
     "Ask something...", 
