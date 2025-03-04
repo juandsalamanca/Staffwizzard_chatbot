@@ -13,6 +13,7 @@ reset = st.button("Reset")
 if reset:
     st.session_state.memory = []
     st.session_state.input_memory = ""
+    st.session_state.sensitive_memory = []
     
 input = st.chat_input(
     "Ask something...", 
@@ -33,10 +34,13 @@ if "input_memory" not in st.session_state:
 if "memory" not in st.session_state:
     st.session_state.memory = []
 
+if "sensitive_memory" not in st.session_state:
+    st.session_state.sensitive_memory = []
+
 def contains_any(string, word_list):
     word_set = set(word_list)  # Convert list to set for O(1) membership tests
     return any(word in string for word in word_set)
-    
+        
 if input:
     st.session_state.input_memory = input    
     info, sensitive_info = retrieve_info(input, st.session_state.info_embeddings, st.session_state.info_list)
@@ -52,5 +56,17 @@ if input:
     else:
         response = employee_info_chatbot("gpt-4o-mini", st.session_state.memory, info)
         st.session_state.memory.append({"role": "assistant", "content": response})
+
+    st.session_state.sensitive_memory.append("")
+    st.session_state.sensitive_memory.append(sensitive_info)
+
+#st.write(st.session_state.sensitive_memory)
+#st.write(st.session_state.memory)
+for i, message in enumerate(st.session_state.memory):
+    with st.chat_message(message["role"]):
+        content = message["content"]
+        if message["role"] == "user":
+            idx = content.index("says:")
+            content = content[idx+6:]
+        st.markdown(content + st.session_state.sensitive_memory[i])
         
-    st.write(response)
