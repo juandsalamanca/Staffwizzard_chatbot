@@ -64,5 +64,5 @@ for i, message in enumerate(st.session_state.memory):
         if message["role"] == "user":
             idx = content.index("says:")
             content = content[idx+6:]
-        st.markdown(content + st.session_date.sensitive_memory[i])
+        st.markdown(content + st.session_state.sensitive_memory[i])
         
