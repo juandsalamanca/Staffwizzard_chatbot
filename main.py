@@ -55,5 +55,9 @@ if input:
         
 for message in st.session_state.memory:
     with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+        content = message["content"]
+        if message["role"] == "user":
+            idx = content.index("says:")
+            content = content[idx:]
+        st.markdown(content)
         
