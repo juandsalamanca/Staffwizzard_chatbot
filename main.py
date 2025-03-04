@@ -55,10 +55,12 @@ if input:
     else:
         response = employee_info_chatbot("gpt-4o-mini", st.session_state.memory, info)
         st.session_state.memory.append({"role": "assistant", "content": response})
-        
-    st.session_state.sensitive_memory.append(sensitive_info)
+
     st.session_state.sensitive_memory.append("")
-        
+    st.session_state.sensitive_memory.append(sensitive_info)
+
+st.write(st.session_state.sensitive_memory)
+st.write(st.session_state.memory)
 for i, message in enumerate(st.session_state.memory):
     with st.chat_message(message["role"]):
         content = message["content"]
