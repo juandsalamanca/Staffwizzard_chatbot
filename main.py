@@ -60,8 +60,8 @@ if input:
     st.session_state.sensitive_memory.append("")
     st.session_state.sensitive_memory.append(sensitive_info)
 
-st.write(st.session_state.sensitive_memory)
-st.write(st.session_state.memory)
+#st.write(st.session_state.sensitive_memory)
+#st.write(st.session_state.memory)
 for i, message in enumerate(st.session_state.memory):
     with st.chat_message(message["role"]):
         content = message["content"]
